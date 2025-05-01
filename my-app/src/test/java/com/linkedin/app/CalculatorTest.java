@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -39,13 +39,10 @@ public class CalculatorTest {
 
   @Test
   public void divideByZero() {
-    Integer result = null;
-    try {
-      result = underTest.divide(6, 0);
-    } catch (IllegalArgumentException e) {
-      // Division by zero occurred
-    }
-    assertNull(result, "Division by zero should result in null");
+    IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> {
+      underTest.divide(6, 0);
+    });
+    assertEquals("Cannot divide by zero!", e.getMessage());
   }
 
   @Test

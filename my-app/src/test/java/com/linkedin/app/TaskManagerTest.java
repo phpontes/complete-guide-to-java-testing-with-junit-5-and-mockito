@@ -9,7 +9,7 @@ public class TaskManagerTest {
   @Test
   public void addTask() {
     TaskManager taskManager = new TaskManager();
-    Task task = new Task();
+    Task task = new Task(1);
 
     taskManager.add(task);
 

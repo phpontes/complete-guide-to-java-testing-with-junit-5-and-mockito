@@ -19,4 +19,11 @@ public class TaskTest {
     String result = task.getDescription();
     assertEquals("Feel the grass", result);
   }
+
+  @Test
+  public void setDescription() {
+    Task task = new Task("Pack for hunt");
+    task.setDescription("Pack guns and ammo");
+    assertEquals("Pack guns and ammo", task.getDescription());
+  }
 }

@@ -11,7 +11,7 @@ public class TaskManagerTest {
   @Test
   public void addTask() {
     TaskManager taskManager = new TaskManager();
-    Task task = new Task();
+    Task task = new Task("Commit a felony");
 
     taskManager.add(task);
 
@@ -21,8 +21,8 @@ public class TaskManagerTest {
   @Test
   public void addTask_duplicateTask() {
     TaskManager taskManager = new TaskManager();
-    Task task1 = new Task();
-    Task task2 = new Task();
+    Task task1 = new Task("Embrace mortality");
+    Task task2 = new Task("Redefine the cosmos");
 
     taskManager.add(task1);
     taskManager.add(task2);
@@ -34,7 +34,7 @@ public class TaskManagerTest {
   @Test
   public void removeTask() {
     TaskManager taskManager = new TaskManager();
-    Task task = new Task();
+    Task task = new Task("Chase asteroids");
     taskManager.add(task);
     int preTaskCount = taskManager.count();
 

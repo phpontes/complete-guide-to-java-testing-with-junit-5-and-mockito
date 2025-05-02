@@ -15,6 +15,10 @@ public class TaskManager {
     tasks.put(task.getId(), task);
   }
 
+  public void remove(int taskId) {
+    tasks.remove(taskId);
+  }
+
   public boolean exists(int taskId) {
     return tasks.containsKey(taskId);
   }

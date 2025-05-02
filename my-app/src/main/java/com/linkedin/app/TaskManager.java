@@ -19,4 +19,8 @@ public class TaskManager {
     return tasks.containsKey(taskId);
   }
 
+  public int count() {
+    return tasks.size();
+  }
+
 }

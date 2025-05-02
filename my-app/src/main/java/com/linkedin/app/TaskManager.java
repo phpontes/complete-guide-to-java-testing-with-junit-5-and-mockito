@@ -19,6 +19,10 @@ public class TaskManager {
     tasks.remove(taskId);
   }
 
+  public Task get(int id) {
+    return tasks.get(id);
+  }
+
   public boolean exists(int taskId) {
     return tasks.containsKey(taskId);
   }

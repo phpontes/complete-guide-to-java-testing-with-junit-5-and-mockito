@@ -4,53 +4,56 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TaskManagerTest {
 
+  private TaskManager underTest;
+  private Task task;
+
+  @BeforeEach
+  void setUp() {
+    underTest = new TaskManager();
+    task = new Task("Praise the Lord and pass the ammunition");
+    assertEquals(0, underTest.count());
+  }
+
   @Test
   public void addTask() {
-    TaskManager taskManager = new TaskManager();
-    Task task = new Task("Commit a felony");
+    underTest.add(task);
 
-    taskManager.add(task);
-
-    assertTrue(taskManager.exists(task.getId()));
+    assertTrue(underTest.exists(task.getId()));
+    assertEquals(1, underTest.count());
   }
 
   @Test
   public void addTask_duplicateTask() {
-    TaskManager taskManager = new TaskManager();
-    Task task1 = new Task("Embrace mortality");
     Task task2 = new Task("Redefine the cosmos");
 
-    taskManager.add(task1);
-    taskManager.add(task2);
-    assertTrue(taskManager.exists(task1.getId()));
-    assertTrue(taskManager.exists(task2.getId()));
-    assertEquals(2, taskManager.count());
+    underTest.add(task);
+    underTest.add(task2);
+    assertTrue(underTest.exists(task.getId()));
+    assertTrue(underTest.exists(task2.getId()));
+    assertEquals(2, underTest.count());
   }
 
   @Test
   public void removeTask() {
-    TaskManager taskManager = new TaskManager();
-    Task task = new Task("Chase asteroids");
-    taskManager.add(task);
-    int preTaskCount = taskManager.count();
+    underTest.add(task);
+    int preTaskCount = underTest.count();
 
-    taskManager.remove(task.getId());
+    underTest.remove(task.getId());
 
-    assertFalse(taskManager.exists(task.getId()));
-    assertEquals(preTaskCount - 1, taskManager.count());
+    assertFalse(underTest.exists(task.getId()));
+    assertEquals(preTaskCount - 1, underTest.count());
   }
 
   @Test
   public void getTask() {
-    TaskManager taskManager = new TaskManager();
-    Task task = new Task("Buy new warp coil");
-    taskManager.add(task);
+    underTest.add(task);
 
-    Task result = taskManager.get(task.getId());
+    Task result = underTest.get(task.getId());
 
     assertEquals(task, result);
   }

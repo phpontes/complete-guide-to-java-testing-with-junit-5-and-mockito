@@ -3,27 +3,33 @@ package com.linkedin.app;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TaskTest {
 
+  private static Task underTest;
+  private static final String DESCRIPTION = "Live like it's 2004 again";
+
+  @BeforeEach
+  public void setUp() {
+    underTest = new Task(DESCRIPTION);
+  }
+
   @Test
   public void getId() {
-    Task task = new Task("Fill a bottle with a handful of sunlight");
-    assertNotNull(task.getId());
+    assertNotNull(underTest.getId());
   }
 
   @Test
   public void getDescription() {
-    Task task = new Task("Feel the grass");
-    String result = task.getDescription();
-    assertEquals("Feel the grass", result);
+    String result = underTest.getDescription();
+    assertEquals(DESCRIPTION, result);
   }
 
   @Test
   public void setDescription() {
-    Task task = new Task("Pack for hunt");
-    task.setDescription("Pack guns and ammo");
-    assertEquals("Pack guns and ammo", task.getDescription());
+    underTest.setDescription(DESCRIPTION + " maybe next month");
+    assertEquals(DESCRIPTION + " maybe next month", underTest.getDescription());
   }
 }

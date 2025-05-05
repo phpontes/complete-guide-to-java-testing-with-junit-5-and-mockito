@@ -1,5 +1,7 @@
 package com.linkedin.app;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
 import java.sql.Timestamp;
@@ -25,7 +27,7 @@ public class TransactionServiceTest {
 
     underTest.processTransaction(transaction);
 
-    verify(loggerService).logMessage("TX123", 10.50,
-        new Timestamp(System.currentTimeMillis()));
+    verify(loggerService).logMessage(eq("TX123"), eq(10.50),
+        any(Timestamp.class));
   }
 }

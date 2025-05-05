@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.linkedin.app.CalculatorTest
--------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.159 s - in com.linkedin.app.CalculatorTest

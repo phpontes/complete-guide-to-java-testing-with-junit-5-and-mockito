@@ -1,6 +1,7 @@
 package com.linkedin.app;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -31,5 +32,11 @@ public class UserServiceTest {
 
     assertEquals(mockUser, result);
     verify(userRepositoryMock).findById("1");
+  }
+
+  @Test
+  public void findUserById_nonExistent() {
+    when(userRepositoryMock.findById("3")).thenReturn(null);
+    assertNull(underTest.findUserById("3"));
   }
 }

@@ -1,6 +1,7 @@
 package com.linkedin.app;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,5 +27,13 @@ public class CalculatorTest {
     @Test
     public void divide() {
         assertEquals(2.0, calculator.divide(4, 2));
+    }
+
+    @Test
+    public void divideByZero() {
+        Exception e = assertThrows(IllegalArgumentException.class, () -> {
+            calculator.divide(5, 0);
+        });
+        assertEquals("Division by zero is not allowed.", e.getMessage());
     }
 }

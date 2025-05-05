@@ -11,6 +11,6 @@ public class CalculatorTest {
     Calculator calculator = new Calculator();
     int result = calculator.add(2, 3);
 
-    assertEquals(5, result, "Expected 5 but got " + result);
+    assertEquals(5, result, () -> "Expected 5 but got " + result);
   }
 }

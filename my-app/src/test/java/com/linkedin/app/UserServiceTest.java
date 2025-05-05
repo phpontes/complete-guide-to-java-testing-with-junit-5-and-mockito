@@ -37,5 +37,23 @@ public class UserServiceTest {
 
     when(userRepositoryMock.findById("3")).thenReturn(null);
     assertNull(underTest.findUserById("3"));
+    verify(userRepositoryMock).findById("3");
+  }
+
+  @Test
+  public void findUserById_twoUsers() {
+    User mockUser1 = new User("1", "José das Couves");
+    User mockUser2 = new User("2", "Maria das Couves");
+    when(userRepositoryMock.findById("1")).thenReturn(mockUser1);
+    when(userRepositoryMock.findById("2")).thenReturn(mockUser2);
+
+    User result1 = underTest.findUserById("1");
+    User result2 = underTest.findUserById("2");
+
+    assertEquals(mockUser1, result1);
+    assertEquals(mockUser2, result2);
+
+    verify(userRepositoryMock).findById("1");
+    verify(userRepositoryMock).findById("2");
   }
 }

@@ -4,14 +4,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserManagementTests {
 
     private static User testUser;
     private static UserService userService = new UserService();
 
     @Test
+    @Order(2)
     void updateUser() {
         assertNotNull(testUser, "Test user should exist");
         testUser.setFirstName("Joe");
@@ -24,6 +29,7 @@ public class UserManagementTests {
     }
 
     @Test
+    @Order(1)
     void createUser() {
         testUser = new User("john_smith", "John", "Smith", "john.doe@example.com");
         userService.createUser(testUser);
@@ -32,6 +38,7 @@ public class UserManagementTests {
     }
 
     @Test
+    @Order(3)
     void getUser() {
         assertNotNull(testUser, "Test user should exist");
         User fetchedUser = userService.getUserById(testUser.getId());
@@ -41,6 +48,7 @@ public class UserManagementTests {
     }
 
     @Test
+    @Order(4)
     void deleteUser() {
         assertNotNull(testUser, "Test user should exist");
         userService.deleteUser(testUser.getId());

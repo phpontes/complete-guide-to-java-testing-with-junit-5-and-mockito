@@ -1,5 +1,12 @@
 package com.linkedin.app;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
@@ -25,11 +32,22 @@ public class UserNotificationServiceTest {
 
     @Test
     void notifyUser() throws EmailException {
+        underTest.notifyUser(EMAIL, MESSAGE);
 
+        verify(emailService).sendEmail(EMAIL, "Notification", MESSAGE);
+        verify(logger).info("Attempting to send notification to " + EMAIL);
+        verify(logger).info("Notification sent to " + EMAIL);
     }
 
     @Test
     void notifyUser_EmailException() throws EmailException {
+        doThrow(new EmailException("Email sending failed"))
+            .when(emailService).sendEmail(EMAIL, "Notification", EMAIL);
 
+        underTest.notifyUser(EMAIL, MESSAGE);
+        verify(emailService).sendEmail(EMAIL, "Notification", MESSAGE);
+        verify(logger).info("Attempting to send notification to " + MESSAGE);
+        verify(logger).log(eq(Level.SEVERE), eq("Failed to send email to " + EMAIL),
+            any(EmailException.class));
     }
 }

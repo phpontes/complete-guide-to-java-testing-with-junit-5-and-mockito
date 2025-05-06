@@ -1,6 +1,10 @@
 package com.linkedin.app;
 
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,5 +29,18 @@ public class UserServiceTest {
 
         underTest.createUser(USERNAME_1);
         verify(userRepository).save(USERNAME_1);
+        verify(userRepository, never()).delete(anyString());
+    }
+
+    @Test
+    public void create_multipleUsers() {
+        underTest.createUser(USERNAME_1);
+        underTest.createUser(USERNAME_2);
+
+        //verify(userRepository, times(2)).save(anyString());
+        verify(userRepository).save(USERNAME_1);
+        verify(userRepository).save(USERNAME_2);
+        verifyNoInteractions(userRepository);
+        verify(userRepository, never()).delete(anyString());
     }
 }
